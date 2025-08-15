@@ -2,6 +2,7 @@ package com.consultaCep.consulta_cep.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import com.consultaCep.consulta_cep.repository.HistoricoRepository;
 
 @Service
 public class HistoricoService {
+    @Value("${viacep.url}")
+    private String viaCepUrl;
     private HistoricoRepository historicoRepository;
 
     public HistoricoService(HistoricoRepository historicoRepository) {
@@ -23,12 +26,12 @@ public class HistoricoService {
         ResponseEntity<Historico> response = 
             rest.getForEntity(
                 String.format(
-                    "https://viacep.com.br/ws/%s/json/", cep)
+                    viaCepUrl, cep)
                 , Historico.class);
         return historicoRepository.save(response.getBody());
     }
 
-    public List<Historico> list(){
+    public List<Historico> read(){
         Sort sort = Sort.by("dataConsulta").descending();
         return historicoRepository.findAll(sort);
     }
@@ -39,6 +42,6 @@ public class HistoricoService {
 
     public List<Historico> delete(Long id){
         historicoRepository.deleteById(id);
-        return list();
+        return read();
     }
 }
