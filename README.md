@@ -124,7 +124,7 @@ A imagem abaixo representa o fluxo da aplicação e do mock.
 
 
 
-![Fluxograma da Aplicação](consulta_cep/Fluxograma_cepApi.png)
+![Fluxograma da Aplicação](Fluxograma_cepApi.png)
 
 ---
 
