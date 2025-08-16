@@ -56,11 +56,20 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
 ```
 
+### Passos para subir o banco via Docker
+
+1. Abra o terminal na pasta do projeto onde está o `docker-compose.yml`.
+2. Execute o comando:
+
+```bash
+docker-compose up -d
+```
+
+3. O PostgreSQL estará rodando em `localhost:5432`.
+
 - Usuário: `admin`
 - Senha: `admin`
 - Banco: `cepdb`
-
-Após subir o container, o banco estará disponível em `localhost:5432`.
 
 ---
 
