@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.consultaCep.consulta_cep.entity.Historico;
 import com.consultaCep.consulta_cep.service.HistoricoService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +29,9 @@ public class HistoricoController {
     }
 
     @PostMapping
-    Historico create(@RequestBody Historico historico){
-        return historicoService.create(historico.getCep());
+    public ResponseEntity<Historico> create(@Valid @RequestBody Historico historico) {
+        historico = historicoService.create(historico.getCep());
+        return ResponseEntity.ok(historico);
     }
 
     @GetMapping
